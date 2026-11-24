@@ -19,7 +19,8 @@ class _RoomTabState extends State<RoomTab> {
   final TextEditingController _lengthCtrl = TextEditingController();
   final TextEditingController _widthCtrl = TextEditingController();
   final TextEditingController _heightCtrl = TextEditingController();
-// runs once when the tab opens: fill the boxes from RoomData
+
+  // runs once when the tab opens: fill the boxes from RoomData
   @override
   void initState() {
     super.initState();
@@ -44,11 +45,122 @@ class _RoomTabState extends State<RoomTab> {
       padding: const EdgeInsets.all(16),
       children: [
         MyTextField(hint: 'Length (m)', controller: _lengthCtrl),
-        const SizedBox(height: 12),
+        const SizedBox(height: 20),
         MyTextField(hint: 'Width (m)', controller: _widthCtrl),
-        const SizedBox(height: 12),
+        const SizedBox(height: 20),
         MyTextField(hint: 'Height (m)', controller: _heightCtrl),
+        const SizedBox(height: 20),
+
+        //doors
+        Container(
+          //keeps the text away from the edge
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: <Widget>[
+              const Text(
+                'Doors',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFB85042),
+                ),
+              ),
+              const Spacer(),
+
+              IconButton(
+                icon: const Icon(Icons.remove),
+                onPressed: () {
+                  setState(() {
+                    if (widget.data.doors > 0) {
+                      widget.data.doors--;
+                    }
+                  });
+                },
+              ),
+              Text('${widget.data.doors}'),
+              IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: () {
+                  setState(() {
+                    widget.data.doors++;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
         const SizedBox(height: 12),
+        //windows
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: <Widget>[
+              const Text(
+                'Windows',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFB85042),
+                ),
+              ),
+              const Spacer(),
+
+              IconButton(
+                icon: const Icon(Icons.remove),
+                onPressed: () {
+                  setState(() {
+                    if (widget.data.windows > 0) {
+                      widget.data.windows--;
+                    }
+                  });
+                },
+              ),
+              Text('${widget.data.windows}'),
+              IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: () {
+                  setState(() {
+                    widget.data.windows++;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 12),
+        ElevatedButton(
+          onPressed: () {
+            try {
+              widget.data.length = double.parse(_lengthCtrl.text);
+              widget.data.width = double.parse(_widthCtrl.text);
+              widget.data.height = double.parse(_heightCtrl.text);
+              DefaultTabController.of(context).animateTo(1);
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Please fill all fields with numbers'),
+                ),
+              );
+            }
+          },
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFFB85042), //button color
+            foregroundColor: Colors.white, //text color
+            minimumSize: const Size.fromHeight(50), //full width,50 height
+          ),
+          child: const Text(
+            'Next',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
       ],
     );
   }

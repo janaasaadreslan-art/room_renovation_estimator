@@ -10,8 +10,10 @@ class MyTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
+      style: const TextStyle(fontSize: 20),
       keyboardType: TextInputType.number,
       decoration: InputDecoration(
+        labelStyle: const TextStyle(fontSize: 18),
         border: const OutlineInputBorder(),
         labelText: hint,
       ),
