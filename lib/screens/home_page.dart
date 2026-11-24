@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:room_renovation_estimator/models/room_data.dart';
 import 'package:room_renovation_estimator/widgets/room_tab.dart';
+import 'package:room_renovation_estimator/widgets/paint_tab.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
         body: TabBarView(
           children: [
             RoomTab(data: data),
-            const Center(child: Text('Paint page')),
+            PaintTab(data: data),
             const Center(child: Text('Floor page')),
             const Center(child: Text('Summary page')),
           ],

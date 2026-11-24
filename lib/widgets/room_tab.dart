@@ -81,7 +81,7 @@ class _RoomTabState extends State<RoomTab> {
                   });
                 },
               ),
-              Text('${widget.data.doors}'),
+              Text('${widget.data.doors}', style: const TextStyle(fontSize: 20)),
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
@@ -123,7 +123,7 @@ class _RoomTabState extends State<RoomTab> {
                   });
                 },
               ),
-              Text('${widget.data.windows}'),
+              Text('${widget.data.windows}', style: const TextStyle(fontSize: 20)),
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
