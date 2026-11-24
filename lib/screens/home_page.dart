@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-
-class HomePage extends StatelessWidget {
+import 'package:room_renovation_estimator/models/room_data.dart';
+import 'package:room_renovation_estimator/widgets/room_tab.dart';
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final RoomData data = RoomData();
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -34,7 +41,7 @@ class HomePage extends StatelessWidget {
 
         body: TabBarView(
           children: [
-            const Center(child: Text('Room page')),
+            RoomTab(data: data),
             const Center(child: Text('Paint page')),
             const Center(child: Text('Floor page')),
             const Center(child: Text('Summary page')),
