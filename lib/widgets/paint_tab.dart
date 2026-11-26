@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:room_renovation_estimator/models/room_data.dart';
 
 import 'my_text_field.dart';
+import 'my_button.dart';
 
 class PaintTab extends StatefulWidget {
   final RoomData data;
@@ -108,7 +109,8 @@ class _PaintTabState extends State<PaintTab> {
           ),
         ),
         const SizedBox(height: 12),
-        ElevatedButton(
+        MyButton(
+          text: 'Next',
           onPressed: () {
             try {
               widget.data.coverage = double.parse(_coverageCtrl.text);
@@ -122,15 +124,6 @@ class _PaintTabState extends State<PaintTab> {
               );
             }
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFB85042), //button color
-            foregroundColor: Colors.white, //text color
-            minimumSize: const Size.fromHeight(50), //full width,50 height
-          ),
-          child: const Text(
-            'Next',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
         ),
       ],
     );

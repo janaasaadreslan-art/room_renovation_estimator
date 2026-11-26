@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:room_renovation_estimator/models/room_data.dart';
 
 import 'my_text_field.dart';
+import 'my_button.dart';
 
 class RoomTab extends StatefulWidget {
   final RoomData data;
@@ -81,7 +82,10 @@ class _RoomTabState extends State<RoomTab> {
                   });
                 },
               ),
-              Text('${widget.data.doors}', style: const TextStyle(fontSize: 20)),
+              Text(
+                '${widget.data.doors}',
+                style: const TextStyle(fontSize: 20),
+              ),
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
@@ -123,7 +127,10 @@ class _RoomTabState extends State<RoomTab> {
                   });
                 },
               ),
-              Text('${widget.data.windows}', style: const TextStyle(fontSize: 20)),
+              Text(
+                '${widget.data.windows}',
+                style: const TextStyle(fontSize: 20),
+              ),
               IconButton(
                 icon: const Icon(Icons.add),
                 onPressed: () {
@@ -136,7 +143,8 @@ class _RoomTabState extends State<RoomTab> {
           ),
         ),
         const SizedBox(height: 12),
-        ElevatedButton(
+        MyButton(
+          text: 'Next',
           onPressed: () {
             try {
               widget.data.length = double.parse(_lengthCtrl.text);
@@ -151,15 +159,6 @@ class _RoomTabState extends State<RoomTab> {
               );
             }
           },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFFB85042), //button color
-            foregroundColor: Colors.white, //text color
-            minimumSize: const Size.fromHeight(50), //full width,50 height
-          ),
-          child: const Text(
-            'Next',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ),
         ),
       ],
     );
