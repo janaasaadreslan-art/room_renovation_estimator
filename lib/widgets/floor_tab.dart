@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:room_renovation_estimator/models/room_data.dart';
 
 import 'my_text_field.dart';
+import 'my_button.dart';
 
 class FloorTab extends StatefulWidget {
   final RoomData data;
@@ -36,11 +37,6 @@ class _FloorTabState extends State<FloorTab> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        MyTextField(hint: 'Price per tile (\$)', controller: _tilePriceCtrl),
-        const SizedBox(height: 20),
-        MyTextField(hint: 'Price per roll (\$)', controller: _rollPriceCtrl),
-        const SizedBox(height: 20),
-
         DropdownMenu<double>(
           label: const Text('Tile size'),
           initialSelection: widget.data.tileSizeCm,
@@ -59,8 +55,9 @@ class _FloorTabState extends State<FloorTab> {
             DropdownMenuEntry(value: 60.0, label: '60 x 60 cm'),
           ],
         ),
-        const SizedBox(height: 12),
-
+        const SizedBox(height: 20),
+        MyTextField(hint: 'Price per tile (\$)', controller: _tilePriceCtrl),
+        const SizedBox(height: 20),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12),
           decoration: BoxDecoration(
@@ -77,12 +74,13 @@ class _FloorTabState extends State<FloorTab> {
                   color: Color(0xFFB85042),
                 ),
               ),
-              const Spacer(), //true or false if waste more than 0
+              const Spacer(),
               Checkbox(
                 value: widget.data.wastePercent > 0,
                 activeColor: const Color(0xFFB85042),
                 onChanged: (value) {
                   setState(() {
+                    //true or false if waste more than 0
                     widget.data.wastePercent = value == true
                         ? 10.0
                         : 0.0; //if checked 10 else 0
@@ -91,6 +89,45 @@ class _FloorTabState extends State<FloorTab> {
               ),
             ],
           ),
+        ),
+        const SizedBox(height: 20),
+        DropdownMenu<double>(
+          label: const Text('Wallpaper roll size'),
+          initialSelection: widget.data.rollWidth,
+          expandedInsets: EdgeInsets.zero,
+          //full width
+          onSelected: (val) {
+            if (val != null) {
+              setState(() {
+                widget.data.rollWidth = val;
+              });
+            }
+          },
+          dropdownMenuEntries: const [
+            DropdownMenuEntry(value: 0.53, label: '0.53 x 10 m'),
+            DropdownMenuEntry(value: 0.70, label: '0.70 x 10 m'),
+            DropdownMenuEntry(value: 1.06, label: '1.06 x 10 m'),
+          ],
+        ),
+        const SizedBox(height: 20),
+        MyTextField(hint: 'Price per roll (\$)', controller: _rollPriceCtrl),
+        const SizedBox(height: 12),
+
+        MyButton(
+          text: 'Calculate',
+          onPressed: () {
+            try {
+              widget.data.pricePerTile = double.parse(_tilePriceCtrl.text);
+              widget.data.pricePerRoll = double.parse(_rollPriceCtrl.text);
+              DefaultTabController.of(context).animateTo(3);
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Please fill all fields with numbers'),
+                ),
+              );
+            }
+          },
         ),
       ],
     );

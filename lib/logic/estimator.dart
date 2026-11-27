@@ -39,8 +39,13 @@ class Estimator {
     return tCost;
   }
 
+  double rollArea() {
+    double rArea = data.rollWidth * data.rollLength;
+    return rArea;
+  }
+
   int rolls() {
-    int roll = (wallArea() / (data.rollWidth * data.rollLength)).ceil() + 1;
+    int roll = (wallArea() / rollArea()).ceil() + 1;
     return roll;
   }
 
