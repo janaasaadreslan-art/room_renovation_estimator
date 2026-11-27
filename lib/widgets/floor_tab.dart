@@ -59,6 +59,39 @@ class _FloorTabState extends State<FloorTab> {
             DropdownMenuEntry(value: 60.0, label: '60 x 60 cm'),
           ],
         ),
+        const SizedBox(height: 12),
+
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          decoration: BoxDecoration(
+            color: Colors.grey.shade200,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            children: [
+              const Text(
+                'Add 10% waste',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFB85042),
+                ),
+              ),
+              const Spacer(), //true or false if waste more than 0
+              Checkbox(
+                value: widget.data.wastePercent > 0,
+                activeColor: const Color(0xFFB85042),
+                onChanged: (value) {
+                  setState(() {
+                    widget.data.wastePercent = value == true
+                        ? 10.0
+                        : 0.0; //if checked 10 else 0
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
