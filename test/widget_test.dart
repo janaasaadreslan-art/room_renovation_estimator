@@ -1,30 +1,30 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:room_renovation_estimator/main.dart';
+import 'package:room_renovation_estimator/models/room_data.dart';
+import 'package:room_renovation_estimator/logic/estimator.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const RenovateApp());
+  test('Default room costs \$460', () {
+    final est = Estimator(RoomData());
+    expect(est.total(), 460);
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  test('Default Wallpaper area is 49.1 m²', () {
+    final est = Estimator(RoomData());
+    expect(est.wallArea(), closeTo(49.1, 0.01));
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  test('Default Liters', () {
+    final est = Estimator(RoomData());
+    expect(est.liters(), 10);
+  });
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('Default Tiles', () {
+    final est = Estimator(RoomData());
+    expect(est.tiles(), 62);
+  });
+
+  test('Default Rolls', () {
+    final est = Estimator(RoomData());
+    expect(est.rolls(), 11);
   });
 }
