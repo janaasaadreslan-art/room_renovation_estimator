@@ -6,11 +6,13 @@ class ResultCard extends StatelessWidget {
   final String detail;
 
   final String cost;
+  final Color color;
 
   const ResultCard({
     required this.title,
     required this.detail,
     required this.cost,
+    required this.color,
     super.key,
   });
 
@@ -26,10 +28,10 @@ class ResultCard extends StatelessWidget {
         children: [
           Text(
             title,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFB85042),
+              color: color,
             ),
           ),
           const Spacer(),
@@ -47,7 +49,7 @@ class ResultCard extends StatelessWidget {
             style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Color(0xFFB85042),
+              color: Colors.black,
             ),
           ),
         ],
