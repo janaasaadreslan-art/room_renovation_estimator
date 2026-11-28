@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:room_renovation_estimator/models/room_data.dart';
-
 import 'my_text_field.dart';
 import 'my_button.dart';
 
@@ -10,9 +9,7 @@ class PaintTab extends StatefulWidget {
   const PaintTab({required this.data, super.key});
 
   @override
-  _PaintTabState createState() {
-    return _PaintTabState();
-  }
+  State<PaintTab> createState() => _PaintTabState();
 }
 
 class _PaintTabState extends State<PaintTab> {
@@ -50,62 +47,43 @@ class _PaintTabState extends State<PaintTab> {
             color: Colors.grey.shade200,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Row(
-            children: <Widget>[
-              const Text(
-                'Coats',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFFB85042),
+          child: RadioGroup<int>(
+            groupValue: widget.data.coats,
+            onChanged: (val) {
+              //val = value of the tapped Radio.
+              setState(() {
+                //redraw the screen so dot move
+                widget.data.coats = val as int; //whole nb
+              });
+            },
+            child: Row(
+              children: <Widget>[
+                const Text(
+                  'Coats',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFB85042),
+                  ),
                 ),
-              ),
-              const Spacer(),
-              Radio(
-                value: 1,
-                groupValue: widget.data.coats,
-                onChanged: (val) {
-                  //val is the value 1
-                  setState(() {
-                    //redraw the screen so dot move
-                    widget.data.coats = val as int; //whole nb
-                  });
-                },
-                activeColor: const Color(0xFFB85042),
-              ),
-              const Text(
-                '1',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Radio(
-                value: 2,
-                groupValue: widget.data.coats,
-                onChanged: (val) {
-                  setState(() {
-                    widget.data.coats = val as int;
-                  });
-                },
-                activeColor: const Color(0xFFB85042),
-              ),
-              const Text(
-                '2',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Radio(
-                value: 3,
-                groupValue: widget.data.coats,
-                onChanged: (val) {
-                  setState(() {
-                    widget.data.coats = val as int;
-                  });
-                },
-                activeColor: const Color(0xFFB85042),
-              ),
-              const Text(
-                '3',
-                style: TextStyle(fontSize: 20, color: Colors.black),
-              ),
-            ],
+                const Spacer(),
+                Radio(value: 1, activeColor: const Color(0xFFB85042)),
+                const Text(
+                  '1',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                Radio(value: 2, activeColor: const Color(0xFFB85042)),
+                const Text(
+                  '2',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                Radio(value: 3, activeColor: const Color(0xFFB85042)),
+                const Text(
+                  '3',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                ),
+              ],
+            ),
           ),
         ),
         const SizedBox(height: 12),

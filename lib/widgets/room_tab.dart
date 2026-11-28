@@ -10,9 +10,7 @@ class RoomTab extends StatefulWidget {
   const RoomTab({required this.data, super.key});
 
   @override
-  _RoomTabState createState() {
-    return _RoomTabState();
-  }
+  State<RoomTab> createState() => _RoomTabState();
 }
 
 class _RoomTabState extends State<RoomTab> {
